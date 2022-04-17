@@ -7,6 +7,14 @@ const todoService = () => {
     })
 }
 
+const todoServiceById = (id) => {
+    console.log("Real Todo By Id");
+    return axios.get(`${process.env.todosURL}${id}`).then(result => {
+        return result.data
+    })
+}
+
 module.exports = {
-    todoService
+    todoService,
+    todoServiceById
 }
