@@ -5,7 +5,7 @@ const {
 jest.mock("./todoService.js")
 
 describe("Todo Service Tests", () => {
-    test("Should return 200 todos", async () => {
+    test("Should return 10 todos", async () => {
         const result = await todoService();
         expect(result).toHaveLength(10);
         expect(result[8].userId).toEqual(1);
