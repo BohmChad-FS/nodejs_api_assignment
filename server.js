@@ -6,6 +6,11 @@ const {
     todoServiceById
 } = require("./services/todoService");
 
+const {
+    drinkService,
+    drinkServiceId
+} = require("./services/drinkService");
+
 const app = express();
 
 // for localhost:3000/
@@ -17,13 +22,13 @@ app.get("/", (req, res, next) => {
 //http://localhost:3000/todo
 app.get("/todo",  (req, res, next) => {
     todoService()
-        .then(result => res.status(200).json(result))
-        .catch(err => res.status(501).json({
-            error: {
-                message: err.message,
-                status: err.status
-            }
-        }))
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(501).json({
+        error: {
+            message: err.message,
+            status: err.status
+        }
+    }))
 });
 
 // get external service by ID
@@ -37,6 +42,29 @@ app.get("/todo/:todoId", (req, res, next) => {
             message: err.message,
             status: err.status,
             method: req.method
+        }
+    }))
+})
+
+app.get("/drink", (req, res, next) => {
+    drinkService()
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(501).json({
+        error: {
+            message: err.message,
+            status: err.status
+        }
+    }))
+})
+
+app.get("/drink/:drinkId", (req, res, next) => {
+    const drinkId = req.params.drinkId;
+    drinkServiceId(drinkId)
+    .then(result => res.status(200).json(result))
+    .catch(err => res.status(err.status || 501).json({
+        error: {
+            message: err.message,
+            status: err.status
         }
     }))
 })
